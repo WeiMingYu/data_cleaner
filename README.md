@@ -225,7 +225,7 @@ def clean_xxxxx(v) -> str:
 if "目標欄位" in df.columns:
     df["目標欄位"] = df["目標欄位"].apply(rules.clean_xxxxx)
 
-##5.2 支援新的來源格式
+## 5.2 支援新的來源格式
 繼承 BaseCleaner，實作 load() 和 map_columns() 兩個方法，即可支援任何格式的來源資料。
 # 例：新增 JSON 來源清洗器
 
