@@ -286,7 +286,7 @@ class JsonCleaner(BaseCleaner):
 欄位名稱有空白|Excel 欄位名稱帶頭尾空格|讀檔後統一 strip 欄位名稱
 網址欄有空網址|爬蟲抓到 http:// |空值	clean_url() 過濾，變空字串
 名稱帶縣市區前綴|部分來源名稱含地區前綴|	clean_name_prefix() 自動去除，可用 CLEAN_NAME_PREFIX=False 關閉
-同名稱多筆資料|來源或主檔有重複 dedup.py | 事先警告，不自動刪除讓使用者確認
+同名稱多筆資料|來源或主檔有重複| dedup.py  事先警告，不自動刪除讓使用者確認
 import 路徑問題（Windows）|相對路徑在 Windows 有時出錯|	各模組用 sys.path.insert 明確加根目錄
 
  
