@@ -1,30 +1,41 @@
 # config.py
 # 所有設定集中在此，不散落各模組
-# 每次換新來源，只需修改這裡
+# 使用者只需要：
+#   1. 把 A檔（來源）放進 input/
+#   2. 把 B檔（主檔）放進 master/
+#   3. 填入下面的檔名
+#   4. 執行 python pipeline.py
 #
-# 使用方式：
-#   from config import SOURCE_FILE, COLUMN_MAP, MATCH_KEYS, ...
+# 不需要填完整路徑，框架自動組合。
 
 import os
 
-# ===== 1. 路徑設定 =====
-
-# 專案根目錄（自動取得 config.py 所在位置）
+# ===== 1. 專案根目錄（自動取得，不需修改）=====
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# 來源檔案（外來資料，清洗前的原始檔）
-SOURCE_FILE = r"C:\bk\py\ece_data.xlsx"
+# ===== 2. 固定目錄（自動組合，不需修改）=====
+INPUT_DIR  = os.path.join(BASE_DIR, "input")    # A檔放這裡（來源檔）
+MASTER_DIR = os.path.join(BASE_DIR, "master")   # B檔放這裡（主檔）
+OUTPUT_DIR = os.path.join(BASE_DIR, "output")   # 結果輸出到這裡
+TEMP_DIR   = os.path.join(BASE_DIR, "temp")     # 暫存（自動建立）
 
-# 主檔路徑（目標，要比對並補齊的主檔）
-MASTER_FILE = r"C:\bk\py\整合_學校類_含MAIL_補齊.xlsx"
+# ===== 3. 【使用者只改這裡】填入檔名即可 =====
 
-# 輸出路徑（比對後產出的新主檔）
-OUTPUT_FILE = r"C:\bk\py\整合_學校類_含MAIL_補齊_更新.xlsx"
+# A檔：來源檔案名稱（放在 input/ 資料夾下）
+SOURCE_FILENAME = "ece_data.xlsx"
 
-# 暫存資料夾（清洗後的標準格式暫存檔）
-TEMP_DIR = os.path.join(BASE_DIR, "temp")
+# B檔：主檔名稱（放在 master/ 資料夾下）
+MASTER_FILENAME = "整合_學校類_含MAIL_補齊.xlsx"
 
-# ===== 2. 來源欄位對應（SOURCE 欄位名稱 → 主檔欄位名稱）=====
+# 輸出檔名（自動寫入 output/ 資料夾）
+OUTPUT_FILENAME = "整合_學校類_含MAIL_補齊_更新.xlsx"
+
+# ===== 4. 完整路徑（自動組合，不需修改）=====
+SOURCE_FILE = os.path.join(INPUT_DIR,  SOURCE_FILENAME)
+MASTER_FILE = os.path.join(MASTER_DIR, MASTER_FILENAME)
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, OUTPUT_FILENAME)
+
+# ===== 5. 來源欄位對應（SOURCE 欄位名稱 → 主檔欄位名稱）=====
 # 說明：左邊是來源檔案的欄位名稱，右邊是主檔的欄位名稱
 # 如果來源沒有某個欄位，不需要列在這裡，主檔欄位保持空白
 COLUMN_MAP = {
@@ -43,29 +54,17 @@ COLUMN_MAP = {
     "資料來源": "資料來源",
 }
 
-# ===== 3. 比對邏輯設定（由使用者定義）=====
-# 說明：決定「哪些欄位相同就視為同一筆資料」
-# 可設定多組規則，依序嘗試，第一組符合就算比對成功
-#
+# ===== 6. 比對邏輯設定（由使用者定義）=====
 # 規則格式：list of list
-#   - 外層 list：多組比對規則，依序嘗試
-#   - 內層 list：同一組規則中，所有欄位都相同才算符合
-#
-# 範例：
-#   [["電話"]]                        → 電話相同就算同一筆
-#   [["名稱", "縣市區"]]              → 名稱+縣市區都相同才算
-#   [["電話"], ["名稱", "縣市區"]]    → 先試電話，找不到再試名稱+縣市區
+#   外層：多組規則依序嘗試，第一組命中即停止
+#   內層：同一組規則中，所有欄位都相同才算符合
 MATCH_KEYS = [
     ["電話"],               # 第一優先：電話完全相同
     ["名稱", "縣市區"],     # 第二優先：名稱+縣市區都相同
 ]
 
-# ===== 4. 補齊邏輯設定 =====
-# 說明：比對成功後，哪些欄位要從來源補到主檔
-# 規則：
-#   - 主檔已有值 → 不覆蓋（保留主檔）
-#   - 主檔是空白 → 從來源補入
-# 如果想強制覆蓋某欄位，列在 FORCE_OVERWRITE_COLUMNS 裡
+# ===== 7. 補齊邏輯設定 =====
+# 主檔已有值 → 不覆蓋；主檔空白 → 從來源補入
 FILL_COLUMNS = [
     "Mail 電子郵件",
     "電話",
@@ -79,22 +78,12 @@ FILL_COLUMNS = [
 # 謹慎使用，通常留空
 FORCE_OVERWRITE_COLUMNS = []
 
-# ===== 5. 清洗規則設定 =====
-# 是否去掉名稱前面的縣市區前綴（例：「臺北市中正區螢橋國小」→「螢橋國小」）
-CLEAN_NAME_PREFIX = True
+# ===== 8. 清洗規則開關 =====
+CLEAN_NAME_PREFIX    = True   # 去掉名稱前縣市區前綴
+CLEAN_PHONE_FORMAT   = True   # 電話格式化
+CLEAN_ADDRESS_PREFIX = True   # 地址去前綴編碼
 
-# 電話號碼格式化：去掉空白、統一分隔符號
-CLEAN_PHONE_FORMAT = True
-
-# 地址清洗：去掉前綴編碼（例：「[01]臺北市...」→「臺北市...」）
-CLEAN_ADDRESS_PREFIX = True
-
-# ===== 6. 輸出設定 =====
-# 待人工確認的 sheet 名稱（比對不到的資料）
-UNMATCHED_SHEET_NAME = "待人工確認"
-
-# 新增筆數的 sheet 名稱（來源有、主檔沒有的，直接新增）
+# ===== 9. 輸出設定 =====
+UNMATCHED_SHEET_NAME  = "待人工確認"
 NEW_RECORDS_SHEET_NAME = "新增資料"
-
-# 是否在 pipeline 結束前詢問確認才寫入（建議 True）
-CONFIRM_BEFORE_WRITE = True
+CONFIRM_BEFORE_WRITE  = True  # 寫入前詢問 y/n 確認

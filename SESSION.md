@@ -1,38 +1,41 @@
 # SESSION.md — data_cleaner
 **專案：通用資料清洗框架**
 **路徑：** `C:\bk\py\data_cleaner\`
+**GitHub：** https://github.com/WeiMingYu/data_cleaner
 **最後更新：2026-05-27**
-**規則：每次對話結束前更新，下次開頭貼給 Claude**
 
 ---
 
 ## 目前狀態
-- 完成度：約 40%
-- 系統可執行：⚠️ 結構建好，尚未實際測試
+- 完成度：約 50%
+- 系統可執行：⚠️ 結構完整，尚未實際測試
 - 已測試來源：❌（尚未）
 - VARIABLES.md：✅ 已同步
+- SESSION.md：✅ 已同步
 
 ---
 
 ## 上次做到
-- 建立完整三層專案結構
-- Layer 1：clean_rules.py / base_cleaner.py / excel_cleaner.py
-- Layer 2：matcher.py / dedup.py
-- Layer 3：exporter.py
-- pipeline.py 一鍵主流程（含 --layer 參數可單層測試）
-- config.py 以 ECE 幼兒園資料為範例設定
+- 建立完整三層專案結構（layer1/2/3 + pipeline）
+- 改善目錄設計：input/ master/ output/ 三個固定資料夾
+- config.py 改為只填檔名，路徑自動組合，不需手動填完整路徑
+- pipeline.py 加入啟動檢查（A檔/B檔不存在時提示放置位置）
+- 產出開發文件 v1.0（.docx）
+- 更新 VARIABLES.md / SESSION.md
 
 ---
 
-## 今天要做
-- 把現有的 import_to_master.py 和 merge_sources.py 邏輯搬進三層架構
-- 測試跑 ece_data.xlsx → 整合_學校類_含MAIL_補齊.xlsx
+## 待完成
+- 實際測試：ece_data.xlsx → 整合_學校類_含MAIL_補齊.xlsx
+- 補齊 README.md（GitHub 用）
+- 開發文件 v1.1（補目錄設計說明）
 
 ---
 
-## 已知問題
-- 尚未實際跑過，可能有 import 路徑問題（Windows 路徑）
-- layer2 matcher 的 CONFLICT 邏輯目前直接丟到 UNMATCHED，有需要再細化
+## 已知問題 / 待確認
+- 尚未實際跑過，可能有 Windows import 路徑問題
+- layer2 多筆命中目前直接丟 UNMATCHED，有需要再細化
+- GitHub 上的版本是否與本地同步？需確認
 
 ---
 
@@ -43,7 +46,7 @@
 
 ## 下次開頭貼給 Claude
 
-> 專案 data_cleaner，路徑 C:\bk\py\data_cleaner\，無 port
-> 上次做到：三層架構建立完成（layer1/2/3 + pipeline），尚未實際測試
-> 今天要做：測試跑 ece_data.xlsx 比對補齊主檔
+> 專案 data_cleaner，路徑 C:\bk\py\data_cleaner\，GitHub: https://github.com/WeiMingYu/data_cleaner
+> 上次做到：三層架構 + input/master/output 目錄設計完成，尚未實際測試
+> 今天要做：（填入今天目標）
 > 已知問題：尚未實際跑過，可能有 import 路徑問題
