@@ -177,16 +177,22 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## 4.3 執行方式
 一鍵跑完全流程
+
+'''
 python pipeline.py
-會依序跑三層，最後顯示統計後詢問「確定要寫入嗎？(y/n)」。輸入 y 才真正寫出 Excel。
+'''
 
-單層測試（建議先逐層驗證）
-python pipeline.py --layer 1    # 只跑清洗，看 temp/layer1_clean.xlsx
-python pipeline.py --layer 2    # 確認清洗結果 OK 再跑比對
-python pipeline.py --layer 3    # 只跑匯出（需要先有 Layer 2 暫存檔）
+#### 會依序跑三層，最後顯示統計後詢問「確定要寫入嗎？(y/n)」。輸入 y 才真正寫出 Excel。
 
+### 單層測試（建議先逐層驗證）
+#### python pipeline.py --layer 1    # 只跑清洗，看 temp/layer1_clean.xlsx
+#### python pipeline.py --layer 2    # 確認清洗結果 OK 再跑比對
+#### python pipeline.py --layer 3    # 只跑匯出（需要先有 Layer 2 暫存檔）
+
+'''
 指定不同來源檔案
 python pipeline.py --source C:\bk\py\new_source.xlsx
+'''
 
 ## 4.4 COLUMN_MAP 設定範例
 以 ECE 幼兒園資料（ece_data.xlsx）為例，來源欄位和主檔欄位名稱不同時的設定方式：
