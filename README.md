@@ -111,17 +111,18 @@ CONFIRM_BEFORE_WRITE	True	寫入前詢問 y/n 確認
 
 ## 3.3 Layer 1 — 清洗層
 ### 3.3.1 clean_rules.py — 清洗規則庫
-所有清洗函數集中在此。遇到新的髒資料格式，在這裡加規則即可，不影響其他模組。
+#### 所有清洗函數集中在此。遇到新的髒資料格式，在這裡加規則即可，不影響其他模組。
 
-函數	說明
-clean_str(v)	基本清洗：None/NaN 轉空字串、去首尾空白
-clean_str_fullwidth(v)	全形轉半形（數字、英文、空格）
-clean_name_prefix(v)	去掉名稱前面的縣市區前綴（例：臺北市中正區→）
-clean_county(v)	縣市名稱標準化（台→臺、去除多餘空白）
-clean_phone(v)	電話清洗：統一分隔符、去空白
-clean_address(v)	地址清洗：去除 [01] 類前綴編碼
-clean_email(v)	Email：轉小寫、去空白
-clean_url(v)	網址：過濾 http:// 空網址
+| 函數	| 說明 |
+|-------|------|
+|clean_str(v)	|基本清洗：None/NaN 轉空字串、去首尾空白|
+|clean_str_fullwidth(v)	|全形轉半形（數字、英文、空格）|
+|clean_name_prefix(v)	|去掉名稱前面的縣市區前綴（例：臺北市中正區→）|
+|clean_county(v)	|縣市名稱標準化（台→臺、去除多餘空白）|
+|clean_phone(v)	|電話清洗：統一分隔符、去空白|
+|clean_address(v)	|地址清洗：去除 [01] 類前綴編碼|
+|clean_email(v)	|Email：轉小寫、去空白|
+|clean_url(v)	|網址：過濾 http:// 空網址|
 
 ### 3.3.2 base_cleaner.py — 清洗基底
 定義清洗的標準流程，子類別只需實作「讀檔」和「欄位對應」兩件事，通用流程（套規則、驗證、補欄位）由基底類別統一處理。
