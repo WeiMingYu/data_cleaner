@@ -178,9 +178,9 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ## 4.3 執行方式
 一鍵跑完全流程
 
-'''
+```
 python pipeline.py
-'''
+```
 
 #### 會依序跑三層，最後顯示統計後詢問「確定要寫入嗎？(y/n)」。輸入 y 才真正寫出 Excel。
 
@@ -189,13 +189,14 @@ python pipeline.py
 #### python pipeline.py --layer 2    # 確認清洗結果 OK 再跑比對
 #### python pipeline.py --layer 3    # 只跑匯出（需要先有 Layer 2 暫存檔）
 
-'''
+```
 指定不同來源檔案
 python pipeline.py --source C:\bk\py\new_source.xlsx
-'''
+```
 
 ## 4.4 COLUMN_MAP 設定範例
 以 ECE 幼兒園資料（ece_data.xlsx）為例，來源欄位和主檔欄位名稱不同時的設定方式：
+```
 COLUMN_MAP = {
     "公私立":   "公私立",         # 名稱相同，直接對應
     "區":       "鄉鎮市區",       # 來源叫「區」，主檔叫「鄉鎮市區」
@@ -203,9 +204,11 @@ COLUMN_MAP = {
     "學校名稱": "名稱",           # 來源叫「學校名稱」，主檔叫「名稱」
 }
 來源沒有的欄位不需要列，對應的主檔欄位自動填空白。
+```
 
 ## 4.5 比對規則設定範例
 MATCH_KEYS 是 list of list，外層多組依序嘗試，內層欄位全部相同才算命中：
+
 ```
 # 電話比對
 MATCH_KEYS = [["電話"]]
