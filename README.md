@@ -1,9 +1,6 @@
 
 
-# data_cleaner
-
-通用資料清洗框架
-開發文件 v1.0
+# data_cleaner 通用資料清洗框架 v1.0
 
 ### 文件名稱 	data_cleaner 通用資料清洗框架 開發文件
 ### 版本	v1.0
