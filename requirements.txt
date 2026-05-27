@@ -1,0 +1,7 @@
+# data_cleaner requirements
+# 安裝指令：
+# pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+pandas>=2.0.0
+openpyxl>=3.1.0
+xlrd>=2.0.0        # 讀 .xls 舊格式用
