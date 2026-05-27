@@ -162,8 +162,10 @@ MATCH_KEYS = [
 
 # 四、使用說明
 ## 4.1 環境安裝
+```
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+```
 ## 4.2 換新來源資料的步驟
 只需修改 config.py，其他程式碼完全不動。
 
