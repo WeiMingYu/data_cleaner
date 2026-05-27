@@ -90,10 +90,11 @@ data_cleaner/
 ## 3.1 master_schema.py — 主檔欄位定義
 整個框架的「唯一真相」。所有欄位名稱、順序、必填設定都在此定義，其他模組都從這裡 import，不各自定義。
 
-常數 / 函數	說明
-MASTER_COLUMNS	主檔欄位清單（list），決定 Excel 輸出的欄位順序
-REQUIRED_COLUMNS	必填欄位（list），清洗後若空白則視為無效資料移除
-empty_record()	回傳一筆空的主檔格式 dict，供清洗層填充
+| 常數 / 函數	| 說明 |
+|---------------|------|
+MASTER_COLUMNS	|主檔欄位清單（list），決定 Excel 輸出的欄位順序
+REQUIRED_COLUMNS	|必填欄位（list），清洗後若空白則視為無效資料移除
+empty_record()	|回傳一筆空的主檔格式 dict，供清洗層填充
 
 ## 3.2 config.py — 所有設定
 換來源只改這個檔案，不需要動其他程式碼。
